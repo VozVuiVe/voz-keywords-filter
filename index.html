@@ -14,15 +14,12 @@
             margin-bottom: 20px;
         }
 
-        .input-box {
-            width: 100%;
-            height: 200px; /* You can adjust the height as needed */
-            border: 1px solid #ccc;
-            margin-top: 10px;
-            padding: 10px;
-            overflow-y: auto;
+        .input-box:empty:not(:focus):before,
+        .output-box:empty:not(:focus):before {
+            content: attr(placeholder)
         }
 
+        .input-box,
         .output-box {
             width: 100%;
             height: 200px; /* You can adjust the height as needed */
@@ -97,10 +94,11 @@
         }
     </script>
 </head>
+
 <body>
     <h1>Keyword Processing</h1>
     <div id="inputBox" class="input-box" contenteditable="true" oninput="processText()" placeholder="Paste your HTML content here..."></div>
-    <div id="outputBox" class="output-box"></div>
+    <div id="outputBox" class="output-box" placeholder="The output HTML content will appear here..."></div>
     <button class="copy-btn" onclick="copyOutput()">Copy Processed Content</button>
 </body>
 </html>
