@@ -66,36 +66,20 @@
             const anchorRegex = /<a\b[^>]*>(.*?)<\/a>/g;
             htmlContent = htmlContent.replace(anchorRegex, '$1');
 
-            // Find words containing 'bca' and replace 'bca' with 'b឴ca'
-            const wordRegex = /\b\w*bca\w*\b/gi;
-            htmlContent = htmlContent.replace(wordRegex, function (match) {
-                return match.replace(/bca/gi, 'b឴ca');
-            });
-
             // insert separator between each character of the keywords
             const keywords = [
-                'công an',
-                'Công an',
-                'Công An',
-                'CÔNG AN',
-                'quân đội',
-                'Quân đội',
-                'Quân Đội',
-                'QUÂN ĐỘI',
-                'thủ tướng',
-                'Thủ tướng',
-                'Thủ Tướng',
-                'THỦ TƯỚNG',
+                'bộ công an',
                 'hiếp dâm',
-                'Hiếp dâm',
-                'Hiếp Dâm',
-                'HIẾP DÂM',
+                'thủ tướng',
+                //  Add these keywords if necessary:
+                //  'bca',
+                //  'công an',
+                //  'quân đội'
             ];
 
             for (let kw of keywords) {
-                let replacedKw = insertSeparator(kw);
-                const kwRegex = new RegExp(kw, 'g');
-                htmlContent = htmlContent.replace(kwRegex, replacedKw);
+                // Specifying a function as the replacement
+                htmlContent = htmlContent.replace(new RegExp(kw, 'gi'), insertSeparator);
             }
 
             outputBox.innerHTML = htmlContent;
